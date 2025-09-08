@@ -12,9 +12,9 @@ CHECKPOINT_PATH = Path("checkpoints/latentsync_unet.pt")
 def process_video(
     video_path,
     audio_path,
-    guidance_scale,
-    inference_steps,
-    seed,
+    guidance_scale: float = 1.5,
+    inference_steps: int = 15,
+    seed: int = 1247,
 ):
     # Create the temp directory if it doesn't exist
     output_dir = Path("./temp")
@@ -54,7 +54,12 @@ def process_video(
 
 
 def create_args(
-    video_path: str, audio_path: str, output_path: str, inference_steps: int, guidance_scale: float, seed: int
+    video_path: str,
+    audio_path: str,
+    output_path: str,
+    inference_steps: int = 15,
+    guidance_scale: float = 1.5,
+    seed: int = 1247
 ) -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--inference_ckpt_path", type=str, required=True)
