@@ -5,7 +5,7 @@ from omegaconf import OmegaConf
 import argparse
 from datetime import datetime
 
-CONFIG_PATH = Path("configs/unet/stage2_512.yaml")
+CONFIG_PATH = Path("configs/unet/stage2_efficient.yaml") or Path("configs/unet/stage2_512.yaml")
 CHECKPOINT_PATH = Path("checkpoints/latentsync_unet.pt")
 
 
@@ -61,8 +61,8 @@ def create_args(
     parser.add_argument("--video_path", type=str, required=True)
     parser.add_argument("--audio_path", type=str, required=True)
     parser.add_argument("--video_out_path", type=str, required=True)
-    parser.add_argument("--inference_steps", type=int, default=20)
-    parser.add_argument("--guidance_scale", type=float, default=1.5)
+    parser.add_argument("--inference_steps", type=int, default=10)
+    parser.add_argument("--guidance_scale", type=float, default=1.2)
     parser.add_argument("--temp_dir", type=str, default="temp")
     parser.add_argument("--seed", type=int, default=1247)
     parser.add_argument("--enable_deepcache", action="store_true")
@@ -85,7 +85,7 @@ def create_args(
             str(seed),
             "--temp_dir",
             "temp",
-            "--enable_deepcache",
+            "--enable_deepcache",  # Enabled by default for faster inference
         ]
     )
 
@@ -116,11 +116,11 @@ with gr.Blocks(title="LatentSync demo") as demo:
                 guidance_scale = gr.Slider(
                     minimum=1.0,
                     maximum=3.0,
-                    value=1.5,
+                    value=1.2,  # Lower default for faster inference
                     step=0.1,
                     label="Guidance Scale",
                 )
-                inference_steps = gr.Slider(minimum=10, maximum=50, value=20, step=1, label="Inference Steps")
+                inference_steps = gr.Slider(minimum=10, maximum=50, value=15, step=1, label="Inference Steps")
 
             with gr.Row():
                 seed = gr.Number(value=1247, label="Random Seed", precision=0)
