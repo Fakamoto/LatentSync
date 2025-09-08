@@ -61,8 +61,8 @@ def create_args(
     parser.add_argument("--video_path", type=str, required=True)
     parser.add_argument("--audio_path", type=str, required=True)
     parser.add_argument("--video_out_path", type=str, required=True)
-    parser.add_argument("--inference_steps", type=int, default=10)
-    parser.add_argument("--guidance_scale", type=float, default=1.2)
+    parser.add_argument("--inference_steps", type=int, default=15)
+    parser.add_argument("--guidance_scale", type=float, default=1.5)
     parser.add_argument("--temp_dir", type=str, default="temp")
     parser.add_argument("--seed", type=int, default=1247)
     parser.add_argument("--enable_deepcache", action="store_true")
@@ -116,7 +116,7 @@ with gr.Blocks(title="LatentSync demo") as demo:
                 guidance_scale = gr.Slider(
                     minimum=1.0,
                     maximum=3.0,
-                    value=1.2,  # Lower default for faster inference
+                    value=1.5,  # Higher quality default
                     step=0.1,
                     label="Guidance Scale",
                 )
