@@ -5,7 +5,7 @@ from omegaconf import OmegaConf
 import argparse
 from datetime import datetime
 
-CONFIG_PATH = Path("configs/unet/stage2_efficient.yaml")  # Using 256x256 for LatentSync 1.5 (faster, lower VRAM)
+CONFIG_PATH = Path("configs/unet/stage2.yaml")  # Using 256x256 for LatentSync 1.5 (faster, lower VRAM)
 CHECKPOINT_PATH = Path("checkpoints/latentsync_unet.pt")
 
 
